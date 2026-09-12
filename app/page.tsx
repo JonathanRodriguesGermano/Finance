@@ -13,6 +13,6 @@ const Home = async () => {
       <UserButton showName />
     </div>
   );
-}
+};
 
 export default Home;
