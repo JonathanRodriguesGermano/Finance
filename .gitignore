@@ -41,4 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# docker 
+.postgres-data
+
 /app/generated/prisma
