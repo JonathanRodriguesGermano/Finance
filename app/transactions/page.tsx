@@ -6,17 +6,27 @@ import { transactionColumns } from "./_columns";
 
 const TransactionsPage = async () => {
   const transactions = await db.transaction.findMany({});
+
+  const transactionWithAmountAsNumber = transactions.map((transaction) => ({
+    ...transaction,
+    amount: transaction.amount.toNumber(),
+  }));
+
+  console.log(transactionWithAmountAsNumber);
   return (
     <div className="space-y-6 p-6">
       {/* TÍTULO E BOTÃO */}
       <div className="flex w-full items-center justify-between">
         <h1 className="text-2xl font-bold">Transações</h1>
-        <Button className="rounded-full">
+        <Button className="rounded-full font-bold">
           Adicionar transação
           <ArrowDownUpIcon />
         </Button>
       </div>
-      <DataTable columns={transactionColumns} data={transactions} />
+      <DataTable
+        columns={transactionColumns}
+        data={transactionWithAmountAsNumber}
+      />
     </div>
   );
 };
