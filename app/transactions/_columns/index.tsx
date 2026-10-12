@@ -7,7 +7,7 @@ import { type DataTableFeatures } from "@/app/_components/ui/data-table-features
 import { Transaction } from "@/app/generated/prisma/browser";
 import TransactionTypeBadge from "../_components/type-badge";
 import { Button } from "@/app/_components/ui/button";
-import { EditIcon, TrashIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
 
 // Modifica o tipo do Prisma substituindo Decimal por number
 export type TransactionDto = Omit<Transaction, "amount"> & {
@@ -21,6 +21,7 @@ import {
   TRANSACTION_CATEGORY_LABELS,
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_constants/transactions";
+import EditTransactionButton from "../_components/edit-transaction-button";
 
 export const transactionColumns = columnHelper.columns([
   columnHelper.accessor("name", {
@@ -62,12 +63,10 @@ export const transactionColumns = columnHelper.columns([
   columnHelper.display({
     id: "actions",
     header: "",
-    cell: () => {
+    cell: ({ row: { original: transaction } }) => {
       return (
         <div className="flex gap-2">
-          <Button variant="ghost" size="icon" className="text-muted-foreground">
-            <EditIcon />
-          </Button>
+          <EditTransactionButton transaction={transaction} />
           <Button variant="ghost" size="icon" className="text-muted-foreground">
             <TrashIcon />
           </Button>
