@@ -17,31 +17,10 @@ export type TransactionDto = Omit<Transaction, "amount"> & {
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, TransactionDto>();
 
-export const TRANSACTION_CATEGORY_LABELS = {
-  EDUCATION: "Educação",
-  ENTERTAINMENT: "Entretenimento",
-  FOOD: "Alimentação",
-  HEALTH: "Saúde",
-  HOUSING: "Moradia",
-  OTHER: "Outros",
-  SALARY: "Salário",
-  TRANSPORTATION: "Transporte",
-  UTILITY: "Utilidades",
-  INSURANCE: "Seguro",
-  LOAN: "Empréstimo",
-  PERSONAL: "Pessoal",
-  GIFT: "Presente",
-};
-
-export const TRANSACTION_PAYMENT_METHOD_LABELS = {
-  BANK_TRANSFER: "Transferência Bancária",
-  BANK_SLIP: "Boleto Bancário",
-  CASH: "Dinheiro",
-  CREDIT_CARD: "Cartão de Crédito",
-  DEBIT_CARD: "Cartão de Débito",
-  OTHER: "Outros",
-  PIX: "Pix",
-};
+import {
+  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_PAYMENT_METHOD_LABELS,
+} from "@/app/_constants/transactions";
 
 export const transactionColumns = columnHelper.columns([
   columnHelper.accessor("name", {
