@@ -3,16 +3,17 @@ import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import { TRANSACTION_PAYMENT_METHOD_ICONS } from "@/app/_constants/transactions";
 import { formatCurrency } from "@/app/_utils/currency";
-import { TransactionType, Transaction } from "@/app/generated/prisma/browser";
+import { TransactionType } from "@/app/generated/prisma/browser";
+import { TransactionDto } from "@/app/_data/transaction-dto";
 import Image from "next/image";
 import Link from "next/link";
 
 interface LastTransactionsProps {
-  lastTransactions: Transaction[];
+  lastTransactions: TransactionDto[];
 }
 
 const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
-  const getAmountColor = (transaction: Transaction) => {
+  const getAmountColor = (transaction: TransactionDto) => {
     if (transaction.type === TransactionType.EXPENSE) {
       return "text-red-500";
     }
@@ -21,7 +22,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
     }
     return "text-white";
   };
-  const getAmountPrefix = (transaction: Transaction) => {
+  const getAmountPrefix = (transaction: TransactionDto) => {
     if (transaction.type === TransactionType.DEPOSIT) {
       return "+";
     }
@@ -35,6 +36,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
           <Button
             variant="outline"
             className="rounded-full font-bold"
+            nativeButton={false}
             render={<Link href="/transactions" />}
           >
             Ver mais
@@ -68,7 +70,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
               </div>
               <p className={`text-sm font-bold ${getAmountColor(transaction)}`}>
                 {getAmountPrefix(transaction)}
-                {formatCurrency(Number(transaction.amount))}
+                {formatCurrency(transaction.amount)}
               </p>
             </div>
           ))}

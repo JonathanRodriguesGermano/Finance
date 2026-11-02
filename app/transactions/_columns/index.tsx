@@ -4,15 +4,12 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 import { type DataTableFeatures } from "@/app/_components/ui/data-table-features";
 
-import { Transaction } from "@/app/generated/prisma/browser";
+import { TransactionDto } from "@/app/_data/transaction-dto";
 import TransactionTypeBadge from "../_components/type-badge";
 import { Button } from "@/app/_components/ui/button";
 import { TrashIcon } from "lucide-react";
 
-// Modifica o tipo do Prisma substituindo Decimal por number
-export type TransactionDto = Omit<Transaction, "amount"> & {
-  amount: number;
-};
+export type { TransactionDto };
 
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, TransactionDto>();

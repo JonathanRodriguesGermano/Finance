@@ -1,5 +1,6 @@
 import { db } from "@/app/_lib/prisma";
 import { TransactionType } from "@/app/generated/prisma/browser";
+import { toTransactionDtos } from "@/app/_data/transaction-dto";
 import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
 import { endOfMonth, startOfMonth } from "date-fns";
 
@@ -86,11 +87,13 @@ export const getDashboard = async (month: string, userId: string) => {
       (Number(category._sum.amount) / Number(expensesTotal)) * 100,
     ),
   }));
-  const lastTransactions = await db.transaction.findMany({
-    where,
-    orderBy: { date: "desc" },
-    take: 15,
-  });
+  const lastTransactions = toTransactionDtos(
+    await db.transaction.findMany({
+      where,
+      orderBy: { date: "desc" },
+      take: 15,
+    }),
+  );
   return {
     balance,
     depositsTotal,

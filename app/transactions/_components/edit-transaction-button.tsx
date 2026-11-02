@@ -2,12 +2,12 @@
 
 import { Button } from "@/app/_components/ui/button";
 import UpsertTransactionDialog from "@/app/_components/upsert-transaction-dialog";
-import { Transaction } from "@/app/generated/prisma/browser";
+import { TransactionDto } from "@/app/_data/transaction-dto";
 import { PencilIcon } from "lucide-react";
 import { useState } from "react";
 
 interface EditTransactionButtonProps {
-  transaction: Omit<Transaction, "amount"> & { amount: number };
+  transaction: TransactionDto;
 }
 
 const EditTransactionButton = ({ transaction }: EditTransactionButtonProps) => {
