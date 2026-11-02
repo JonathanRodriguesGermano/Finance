@@ -1,12 +1,8 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import Navbar from "./_components/navbar";
+import { requireAuth } from "./_lib/auth";
 
 const Home = async () => {
-  const { userId } = await auth();
-  if (!userId) {
-    redirect("/login");
-  }
+  await requireAuth();
 
   return <Navbar />;
 };

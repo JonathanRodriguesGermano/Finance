@@ -1,6 +1,8 @@
 import Navbar from "../_components/navbar";
+import { requireAuth } from "../_lib/auth";
 
-const SubscriptionPage = () => {
+const SubscriptionPage = async () => {
+  await requireAuth();
   return <Navbar />;
 };
 
