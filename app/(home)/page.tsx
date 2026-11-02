@@ -6,6 +6,7 @@ import { format, isMatch } from "date-fns";
 import { requireAuth } from "../_lib/auth";
 import TransactionsPieChart from "./_components/transactions-pie-chart";
 import { getDashboard } from "../_data/get-dashboard";
+import ExpensesPerCategory from "./_components/expenses-per-category";
 
 interface HomeProps {
   searchParams: Promise<{
@@ -36,6 +37,9 @@ const Home = async ({ searchParams }: HomeProps) => {
             <SummaryCards month={month} userId={userId} {...dashboard} />
             <div className="grid grid-cols-3 grid-rows-1 gap-6">
               <TransactionsPieChart {...dashboard} />
+              <ExpensesPerCategory
+                expensesPerCategory={dashboard.totalExpensePerCategory}
+              />
             </div>
           </div>
           ola mundo
