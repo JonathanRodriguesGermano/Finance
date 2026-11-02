@@ -43,6 +43,10 @@ export const TRANSACTION_TYPE_OPTIONS = [
     value: TransactionType.INVESTMENT,
     label: "Investimento",
   },
+  {
+    value: TransactionType.OTHER,
+    label: "Outros",
+  },
 ];
 
 export const TRANSACTION_PAYMENT_METHOD_OPTIONS = [
