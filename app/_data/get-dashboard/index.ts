@@ -3,8 +3,10 @@ import { TransactionType } from "@/app/generated/prisma/browser";
 import { toTransactionDtos } from "@/app/_data/transaction-dto";
 import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
 import { endOfMonth, startOfMonth } from "date-fns";
+import { requireAuth } from "@/app/_lib/auth";
 
-export const getDashboard = async (month: string, userId: string) => {
+export const getDashboard = async (month: string) => {
+  const userId = await requireAuth();
   const monthDate = new Date(new Date().getFullYear(), Number(month) - 1, 1);
 
   const where = {

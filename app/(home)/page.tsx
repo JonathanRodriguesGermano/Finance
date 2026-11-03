@@ -22,9 +22,10 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   const monthIsInvalid = !month || !isMatch(month, "MM");
   if (monthIsInvalid) {
-    redirect(`?month=${format(new Date(), "MM")}`);
+    const currentMonth = format(new Date(), "MM");
+    redirect(`?month=${currentMonth}`);
   }
-  const dashboard = await getDashboard(month, userId);
+  const dashboard = await getDashboard(month);
   return (
     <>
       <Navbar />
